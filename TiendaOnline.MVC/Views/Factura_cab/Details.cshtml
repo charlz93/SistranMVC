@@ -1,0 +1,66 @@
+﻿@model TiendaOnline.MVC.Models.Factura_cab
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Factura_cab</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Total)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Total_imp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Total_imp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Procesado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Procesado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha_Fac)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha_Fac)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estados.Nombre_estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estados.Nombre_estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuarios.codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usuarios.codigo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_factura_cab }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
