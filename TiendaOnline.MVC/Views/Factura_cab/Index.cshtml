@@ -1,0 +1,63 @@
+﻿@model IEnumerable<TiendaOnline.MVC.Models.Factura_cab>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Total)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Total_imp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Procesado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha_Fac)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estados.Nombre_estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuarios.codigo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Total)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Total_imp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Procesado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha_Fac)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Estados.Nombre_estado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuarios.codigo)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id_factura_cab }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id_factura_cab }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id_factura_cab })
+        </td>
+    </tr>
+}
+
+</table>
