@@ -27,49 +27,54 @@
             @Html.DisplayNameFor(model => model.Descripcion)
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.Categorias.Nombre_categoria)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Estados.Nombre_estado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Promociones.Descripcion)
-        </th>*@
+                @Html.DisplayNameFor(model => model.Categorias.Nombre_categoria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estados.Nombre_estado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Promociones.Descripcion)
+            </th>*@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.cantidad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre_producto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Precio))
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Imagen)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descripcion)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Categorias.Nombre_categoria)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Estados.Nombre_estado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Promociones.Descripcion)
-        </td>*@
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id_producto }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id_producto }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id_producto })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.cantidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre_producto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio))
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Imagen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.Categorias.Nombre_categoria)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estados.Nombre_estado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Promociones.Descripcion)
+                </td>*@
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id_producto }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id_producto }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id_producto })
+            </td>
+        </tr>
+    }
 
 </table>
+<div>
+    @Html.ActionLink("Agregar una nuevo Producto", "Create")
+</div>
+
