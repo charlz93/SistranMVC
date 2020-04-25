@@ -427,4 +427,3 @@ C:\Users\dvargasm\Desktop\PrograV\Proyecto\MVC_GIT\MVC_GIT 11 40\MVC_GIT\Sistran
 C:\Users\dvargasm\Desktop\PrograV\Proyecto\MVC_GIT\MVC_GIT 11 40\MVC_GIT\SistranMVC\TiendaOnline.MVC\obj\Debug\TiendaOnline.MVC.csproj.CopyComplete
 C:\Users\dvargasm\Desktop\PrograV\Proyecto\MVC_GIT\MVC_GIT 11 40\MVC_GIT\SistranMVC\TiendaOnline.MVC\obj\Debug\TiendaOnline.MVC.dll
 C:\Users\dvargasm\Desktop\PrograV\Proyecto\MVC_GIT\MVC_GIT 11 40\MVC_GIT\SistranMVC\TiendaOnline.MVC\obj\Debug\TiendaOnline.MVC.pdb
-C:\Users\dvargasm\Desktop\PrograV\Proyecto\MVC_GIT\SistranMVC\TiendaOnline.MVC\obj\Debug\TiendaOnline.MVC.csprojAssemblyReference.cache

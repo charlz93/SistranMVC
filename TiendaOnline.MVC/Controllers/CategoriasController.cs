@@ -9,6 +9,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+
 using TiendaOnline.MVC.Models;
 
 namespace TiendaOnline.MVC.Controllers
@@ -57,7 +58,7 @@ namespace TiendaOnline.MVC.Controllers
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(baseurl);
+               /* cli*/ent.BaseAddress = new Uri(baseurl);
 
                 var myContent = JsonConvert.SerializeObject(entidad);
                 var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
