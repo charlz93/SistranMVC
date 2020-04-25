@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 
 /******************************
@@ -759,7 +759,7 @@ section
 .menu_social
 {
 	position: absolute;
-	right: 30px;
+	left: 30px;
 	bottom: 15px;
 }
 .menu_social ul li

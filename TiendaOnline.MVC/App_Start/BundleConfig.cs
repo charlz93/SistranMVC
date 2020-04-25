@@ -31,8 +31,7 @@ namespace TiendaOnline.MVC
                 "~/Content/plugins/OwlCarousel2-2.2.1/owl.carousel.js",
                 "~/Content/plugins/Isotope/isotope.pkgd.min.js",
                 "~/Content/plugins/easing/easing.js",
-                "~/Content/plugins/parallax-js-master/parallax.min.js",
-                "~/Content/js/custom.js"));
+                "~/Content/plugins/parallax-js-master/parallax.min.js"));
            
                
             bundles.Add(new StyleBundle("~/Content/css").Include(

@@ -12,16 +12,16 @@ namespace TiendaOnline.MVC.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
 
-            //var httpClient = new HttpClient();
-            //var json = await httpClient.GetStringAsync("https://sistranapi.azurewebsites.net/api/Categorias/GetAll");
-            //var CategoriasList = JsonConvert.DeserializeObject<List<Categoria>>(json);
-            //List<Categoria> Categorialist = JsonConvert.DeserializeObject<List<Categoria>>(json);
-            //return View(Categorialist);
+            var httpClient = new HttpClient();
+            var json = await httpClient.GetStringAsync("https://sistranapi.azurewebsites.net/api/Categorias/GetAll");
+            var CategoriasList = JsonConvert.DeserializeObject<List<Categoria>>(json);
+            List<Categoria> categorialist = JsonConvert.DeserializeObject<List<Categoria>>(json);
+            Session["categorias"] = categorialist;
 
-            return View();
+            return View(categorialist);
         }
 
         public ActionResult About()
