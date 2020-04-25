@@ -38,8 +38,6 @@ namespace TiendaOnline.MVC.Controllers
             return View(aux);
         }
 
-
-
         // GET: Categorias/Details/5
         public ActionResult Details(int id)
         {
@@ -58,7 +56,7 @@ namespace TiendaOnline.MVC.Controllers
         {
             using (var client = new HttpClient())
             {
-               /* cli*/ent.BaseAddress = new Uri(baseurl);
+                client.BaseAddress = new Uri(baseurl);
 
                 var myContent = JsonConvert.SerializeObject(entidad);
                 var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
@@ -127,35 +125,54 @@ namespace TiendaOnline.MVC.Controllers
         }
 
         // GET: Categorias/Delete/5
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
-           
-            return View();
-        }
-
-        // POST: Categorias/Delete/5
-        [HttpPost]
-
-        public ActionResult Delete(int id)
-        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Categoria Categorias = new Categoria();
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://sistranapi.azurewebsites.net/");
+                client.BaseAddress = new Uri(baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await client.GetAsync("api/Categorias/GetOneById/5?id=" + id);
 
-                //HTTP DELETE
-                var deleteTask = client.DeleteAsync("Categorias/" + id.ToString());
-                deleteTask.Wait();
-
-                var result = deleteTask.Result;
-                if (result.IsSuccessStatusCode)
+                if (res.IsSuccessStatusCode)
                 {
+                    var auxRes = res.Content.ReadAsStringAsync().Result;
 
-                    return RedirectToAction("Index");
+                    Categorias = JsonConvert.DeserializeObject<Categoria>(auxRes);
                 }
             }
 
-            return RedirectToAction("Index");
+            return View(Categorias);
         }
+        
+        // POST: Categorias/Delete/5
+        [HttpPost]
+        public ActionResult Delete(Categoria entidad)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(baseurl);
+
+                var myContent = JsonConvert.SerializeObject(entidad);
+                var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
+                var byteContent = new ByteArrayContent(buffer);
+                byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                var postTask = client.PostAsync("api/Categorias/Delete", byteContent).Result;
+
+                var result = postTask;
+                if (result.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            ModelState.AddModelError(string.Empty, "Error en el servidor, porfavor contactar al adminitrador del sistema");
+            return View(entidad);
         }
+    }
     }
 

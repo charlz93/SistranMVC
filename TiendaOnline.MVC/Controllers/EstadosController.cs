@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+//using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+
 using TiendaOnline.MVC.Models;
 
 namespace TiendaOnline.MVC.Controllers
@@ -15,7 +17,7 @@ namespace TiendaOnline.MVC.Controllers
     public class EstadosController : Controller
     {
         // GET: Estados
-         string baseurl = "https://sistranapi.azurewebsites.net/";
+        string baseurl = "https://sistranapi.azurewebsites.net/";
         public async Task<ActionResult> Index()
         {
             List<Estado> aux = new List<Estado>();
@@ -85,7 +87,7 @@ namespace TiendaOnline.MVC.Controllers
                 client.BaseAddress = new Uri(baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = await client.GetAsync("api/Estados/GetOneById/5?id=" + id);
+                HttpResponseMessage res = await client.GetAsync("api/Estado/GetOneById/5?id=" + id);
 
                 if (res.IsSuccessStatusCode)
                 {
@@ -100,40 +102,77 @@ namespace TiendaOnline.MVC.Controllers
 
         // POST: Estados/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Estado entidad)
         {
-            try
+            using (var client = new HttpClient())
             {
-                // TODO: Add update logic here
+                client.BaseAddress = new Uri(baseurl);
 
-                return RedirectToAction("Index");
+                var myContent = JsonConvert.SerializeObject(entidad);
+                var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
+                var byteContent = new ByteArrayContent(buffer);
+                byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                var postTask = client.PostAsync("api/Estado/Updated", byteContent).Result;
+
+                var result = postTask;
+                if (result.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
             }
-            catch
-            {
-                return View();
-            }
+            ModelState.AddModelError(string.Empty, "Error en el servidor, porfavor contactar al adminitrador del sistema");
+            return View(entidad);
         }
 
         // GET: Estados/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Estado Estados = new Estado();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await client.GetAsync("api/Estado/GetOneById/5?id=" + id);
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxRes = res.Content.ReadAsStringAsync().Result;
+
+                    Estados = JsonConvert.DeserializeObject<Estado>(auxRes);
+                }
+            }
+
+            return View(Estados);
         }
 
         // POST: Estados/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(Estado entidad)
         {
-            try
+            using (var client = new HttpClient())
             {
-                // TODO: Add delete logic here
+                client.BaseAddress = new Uri(baseurl);
 
-                return RedirectToAction("Index");
+                var myContent = JsonConvert.SerializeObject(entidad);
+                var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
+                var byteContent = new ByteArrayContent(buffer);
+                byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                var postTask = client.PostAsync("api/Estado/Delete", byteContent).Result;
+
+                var result = postTask;
+                if (result.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
             }
-            catch
-            {
-                return View();
-            }
+            ModelState.AddModelError(string.Empty, "Error en el servidor, porfavor contactar al adminitrador del sistema");
+            return View(entidad);
         }
     }
 }
+

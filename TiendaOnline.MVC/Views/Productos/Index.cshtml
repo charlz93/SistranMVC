@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<TiendaOnline.MVC.Models.Producto>
+
 @{ ViewBag.Title = "Index";}
 <div class="limiter">
     <div class="container-login100">
@@ -9,7 +10,7 @@
             <table class="table">
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.cantidad )
+                        @Html.DisplayNameFor(model => model.cantidad)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Nombre_producto)
@@ -17,21 +18,16 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Precio)
                     </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Id_categoria)
+                    </th>
                     @*<th>
-                        @Html.DisplayNameFor(model => model.Imagen)
-                    </th>*@
+            @Html.DisplayNameFor(model => model.Imagen)
+        </th>*@
                     <th>
                         @Html.DisplayNameFor(model => model.Descripcion)
                     </th>
-                    @*<th>
-                            @Html.DisplayNameFor(model => model.Categoria.Nombre_categoria)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Estado.Nombre_estado)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Promociones.Descripcion)
-                        </th>*@
+
                     <th></th>
                 </tr>
 
@@ -47,21 +43,16 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Precio))
                 </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id_categoria))
+                </td>
                 @*<td>
             @Html.DisplayFor(modelItem => item.Imagen)
         </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.Descripcion)
                 </td>
-                @*<td>
-            @Html.DisplayFor(modelItem => item.Categoria.Nombre_categoria)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Estado.Nombre_estado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Promociones.Descripcion)
-        </td>*@
+
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id_producto }) |
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id_producto })
@@ -77,3 +68,4 @@
         </div>
     </div>
 </div>
+
