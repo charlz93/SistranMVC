@@ -13,9 +13,9 @@ using TiendaOnline.MVC.Models;
 
 namespace TiendaOnline.MVC.Controllers
 {
-    public class PromocionessController : Controller
+    public class PromocionesController : Controller
     {
-        // GET: Promocioness
+        // GET: Promociones
         string baseurl = "https://sistranapi.azurewebsites.net/";
         public async Task<ActionResult> Index()
         {
@@ -25,7 +25,7 @@ namespace TiendaOnline.MVC.Controllers
                 client.BaseAddress = new Uri(baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = await client.GetAsync("api/Promocioness/GetAll");
+                HttpResponseMessage res = await client.GetAsync("api/Promociones/GetAll");
 
                 if (res.IsSuccessStatusCode)
                 {
@@ -39,19 +39,19 @@ namespace TiendaOnline.MVC.Controllers
 
 
 
-        // GET: Promocioness/Details/5
+        // GET: Promociones/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Promocioness/Create
+        // GET: Promociones/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Promocioness/Create
+        // POST: Promociones/Create
         [HttpPost]
         public ActionResult Create(Promociones entidad)
         {
@@ -63,7 +63,7 @@ namespace TiendaOnline.MVC.Controllers
                 var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
                 var byteContent = new ByteArrayContent(buffer);
                 byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                var postTask = client.PostAsync("api/Promocioness/Insert", byteContent).Result;
+                var postTask = client.PostAsync("api/Promociones/Insert", byteContent).Result;
 
                 var result = postTask;
                 if (result.IsSuccessStatusCode)
@@ -75,33 +75,33 @@ namespace TiendaOnline.MVC.Controllers
             return View(entidad);
         }
 
-        // GET: Promocioness/Edit/5
+        // GET: Promociones/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Promociones Promocioness = new Promociones();
+            Promociones Promociones = new Promociones();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = await client.GetAsync("api/Promocioness/GetOneById/5?id=" + id);
+                HttpResponseMessage res = await client.GetAsync("api/Promociones/GetOneById/5?id=" + id);
 
                 if (res.IsSuccessStatusCode)
                 {
                     var auxRes = res.Content.ReadAsStringAsync().Result;
 
-                    Promocioness = JsonConvert.DeserializeObject<Promociones>(auxRes);
+                    Promociones = JsonConvert.DeserializeObject<Promociones>(auxRes);
                 }
             }
 
-            return View(Promocioness);
+            return View(Promociones);
         }
 
-        // POST: Promocioness/Edit/5
+        // POST: Promociones/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -117,7 +117,7 @@ namespace TiendaOnline.MVC.Controllers
             }
         }
 
-        // GET: Promocioness/Delete/5
+        // GET: Promociones/Delete/5
         public ActionResult Delete(int? id)
         {
             //if (id == null)
@@ -132,7 +132,7 @@ namespace TiendaOnline.MVC.Controllers
             return View();
         }
 
-        // POST: Promocioness/Delete/5
+        // POST: Promociones/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

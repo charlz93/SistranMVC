@@ -1,36 +1,38 @@
 ﻿@model IEnumerable<TiendaOnline.MVC.Models.Estado>
 
-@{
-    ViewBag.Title = "Index";
-}
+@{    ViewBag.Title = "Index"; }
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-pic js-tilt" data-tilt>
+            </div>
+            <h2>Estados</h2>
 
-<h2>Index</h2>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nombre_estado)
+                    </th>
+                    <th></th>
+                </tr>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nombre_estado)
-        </th>
-        <th></th>
-    </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre_estado)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id_estado }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id_estado })
+                        </td>
+                    </tr>
+                }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre_estado)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id_estado }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id_estado }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id_estado })
-        </td>
-    </tr>
-}
-
-</table>
-<div>
-    @Html.ActionLink("Agregar una nuevo estado", "Create")
+            </table>
+            <div>
+                @Html.ActionLink("Agregar una nuevo estado", "Create")
+            </div>
+        </div>
+    </div>
 </div>

@@ -103,49 +103,58 @@ namespace TiendaOnline.MVC.Controllers
 
         // POST: Categorias/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Categoria entidad)
         {
-            try
+            using (var client = new HttpClient())
             {
-                // TODO: Add update logic here
+                client.BaseAddress = new Uri(baseurl);
 
-                return RedirectToAction("Index");
+                var myContent = JsonConvert.SerializeObject(entidad);
+                var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
+                var byteContent = new ByteArrayContent(buffer);
+                byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                var postTask = client.PostAsync("api/Categorias/Updated", byteContent).Result;
+
+                var result = postTask;
+                if (result.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
             }
-            catch
-            {
-                return View();
-            }
+            ModelState.AddModelError(string.Empty, "Error en el servidor, porfavor contactar al adminitrador del sistema");
+            return View(entidad);
         }
 
         // GET: Categorias/Delete/5
         public ActionResult Delete(int? id)
         {
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            //Categoria categoria = Models.Categoria. (id);
-            //if (categoria == null)
-            //{
-            //    return HttpNotFound();
-            //}
+           
             return View();
         }
 
         // POST: Categorias/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
+        public ActionResult Delete(int id)
+        {
+            using (var client = new HttpClient())
             {
-                return View();
+                client.BaseAddress = new Uri("http://sistranapi.azurewebsites.net/");
+
+                //HTTP DELETE
+                var deleteTask = client.DeleteAsync("Categorias/" + id.ToString());
+                deleteTask.Wait();
+
+                var result = deleteTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+
+                    return RedirectToAction("Index");
+                }
             }
+
+            return RedirectToAction("Index");
+        }
         }
     }
-}
+

@@ -23,11 +23,11 @@
         <th>
             @Html.DisplayNameFor(model => model.Fecha_insert)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.Factura_cab.Id_factura_cab)
-        </th>
+        </th>*@
         <th>
-            @Html.DisplayNameFor(model => model.Productos.Nombre_producto)
+            @Html.DisplayNameFor(model => model.Producto.Nombre_producto)
         </th>
         <th></th>
     </tr>
@@ -46,11 +46,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.Fecha_insert)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.Factura_cab.Id_factura_cab)
-        </td>
+        </td>*@
         <td>
-            @Html.DisplayFor(modelItem => item.Productos.Nombre_producto)
+            @Html.DisplayFor(modelItem => item.Producto.Nombre_producto)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id_factura_lin }) |
