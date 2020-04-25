@@ -1,8 +1,9 @@
 ﻿@model TiendaOnline.MVC.Models.Usuario
 
+
 @{
     ViewBag.Title = "Index";
-   
+
 }
 
 <div class="limiter">
@@ -12,14 +13,14 @@
                 <img src="images/img-01.png" alt="IMG">
             </div>
 
-            @using (Html.BeginForm("Autorizar","Usuarios",FormMethod.Post, new { @class = "login100-form validate-form" }))
+            @using (Html.BeginForm("Autorizar", "Usuarios", FormMethod.Post, new { @class = "login100-form validate-form" }))
             {
                 <span class="login100-form-title">
                     Login
                 </span>
 
                 <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                    @Html.EditorFor(model => model.codigo,new { htmlAttributes = new { @class = "input100", placeholder = "Email"} })
+                    @Html.EditorFor(model => model.codigo, new { htmlAttributes = new { @class = "input100", placeholder = "Email" } })
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">
                         <i class="fa fa-envelope" aria-hidden="true"></i>
@@ -27,7 +28,7 @@
                 </div>
 
                 <div class="wrap-input100 validate-input" data-validate="Password is required">
-                    @Html.EditorFor(model => model.clave,new { htmlAttributes = new { @class = "input100", placeholder = "Password"} })
+                    @Html.EditorFor(model => model.clave, new { htmlAttributes = new { @class = "input100", placeholder = "Password" } })
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">
                         <i class="fa fa-lock" aria-hidden="true"></i>
@@ -73,9 +74,9 @@
 <!--===============================================================================================-->
 <script src="vendor/tilt/tilt.jquery.min.js"></script>
 <script>
-		$('.js-tilt').tilt({
-			scale: 1.1
-		})
+    $('.js-tilt').tilt({
+        scale: 1.1
+    })
 </script>
 <!--===============================================================================================-->
 <script src="js/main.js"></script>

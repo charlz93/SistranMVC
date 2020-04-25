@@ -20,8 +20,7 @@ namespace TiendaOnline.MVC.Models
 
         //public virtual Categoria Categoria { get; set; }
         //public virtual Estado Estado { get; set; }
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        //public virtual ICollection<Factura> Facturas { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]     
         //public virtual Promociones Promociones { get; set; }
     }
 }

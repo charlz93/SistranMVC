@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 //using System.Net.Http;
 using System.Net.Http.Headers;
@@ -52,24 +53,52 @@ namespace TiendaOnline.MVC.Controllers
 
         // POST: Categorias/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Categoria entidad)
         {
-            try
+            using (var client = new HttpClient())
             {
-                // TODO: Add insert logic here
+                client.BaseAddress = new Uri(baseurl);
 
-                return RedirectToAction("Index");
+                var myContent = JsonConvert.SerializeObject(entidad);
+                var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
+                var byteContent = new ByteArrayContent(buffer);
+                byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                var postTask = client.PostAsync("api/Categorias/Insert", byteContent).Result;
+
+                var result = postTask;
+                if (result.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
             }
-            catch
-            {
-                return View();
-            }
+            ModelState.AddModelError(string.Empty, "Server Error, Please contact administrator");
+            return View(entidad);
         }
 
         // GET: Categorias/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Categoria Categorias = new Categoria();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await client.GetAsync("api/Categorias/GetOneById/5?id=" + id);
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxRes = res.Content.ReadAsStringAsync().Result;
+
+                    Categorias = JsonConvert.DeserializeObject<Categoria>(auxRes);
+                }
+            }
+
+            return View(Categorias);
         }
 
         // POST: Categorias/Edit/5
@@ -89,8 +118,17 @@ namespace TiendaOnline.MVC.Controllers
         }
 
         // GET: Categorias/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //Categoria categoria = Models.Categoria. (id);
+            //if (categoria == null)
+            //{
+            //    return HttpNotFound();
+            //}
             return View();
         }
 
